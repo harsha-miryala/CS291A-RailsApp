@@ -1,0 +1,23 @@
+<h1>Welcome to Twitter Lite</h1>
+<h2>Feed:</h2>
+<ul>
+  <% @posts.each do |post| %>
+    <p>
+      <strong>Title:</strong>
+      <%= post.title %>
+    </p>
+    <p>
+      <strong>Body:</strong>
+      <%= post.body %>
+    </p>
+    <p>
+      <strong>By:</strong>
+      <%= link_to User.find(post.user_id).name, user_path(User.find(post.user_id)) %>
+    </p>
+    <button>
+      <%= link_to "Go to post", post %>
+    </button>
+    <p> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ </p>
+  <% end %>
+</ul>
+

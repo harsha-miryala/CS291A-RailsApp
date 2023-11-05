@@ -1,0 +1,25 @@
+<h1>Users Home Page</h1>
+<h2> All Users</h2>
+<div>
+  <table>
+    <tr>
+      <th>User Id</th>
+      <th>Name</th>
+    </tr>
+
+    <% @users.each do |user| %>
+      <tr>
+        <td> <%= user.id %> </td>
+        <td> <%= link_to user.name, user %> </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<br>
+<div>
+  <footer>
+    <button>
+      <%= link_to "Create a New User", new_user_path %>
+    </button>
+  </footer>
+</div>

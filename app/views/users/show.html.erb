@@ -1,0 +1,50 @@
+<h1> User Profile </h1>
+<h2><%= @user.name %></h2>
+
+
+<button><%= link_to "Edit User", edit_user_path(@user) %></button>
+<button><%= link_to "Destroy User", user_path(@user), data: {
+  turbo_method: :delete,
+  turbo_confirm: "Are you sure?"
+} %></button>
+
+<p> ******************************************************************************************************* </p>
+
+<div>
+  <h3>Posts:</h3>
+  <ul>
+    <% @user.posts.each do |post| %>
+        <p>
+          <strong>Title:</strong>
+          <%= post.title %>
+        </p>
+        <p>
+          <strong>Body:</strong>
+          <%= post.body %>
+        </p>
+        <button type="button"> <%= link_to "Go to post", post %></button>
+        <p> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ </p>
+    <% end %>
+  </ul>
+</div>
+
+<p> ******************************************************************************************************* </p>
+<h3>Add a post:</h3>
+<%= form_with model: [@user, @user.posts.build] do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<p> ******************************************************************************************************* </p>
+<button><%= link_to "All Users", users_path %></button>
+
+

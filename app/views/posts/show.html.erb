@@ -1,0 +1,53 @@
+<h2>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</h2>
+<strong>By:</strong>
+<%= link_to User.find(@post.user_id).name, user_path(User.find(@post.user_id)) %>
+
+<p>
+  <%= @post.body %>
+</p>
+
+<button><%= link_to "Edit", edit_post_path(@post) %></button>
+<button><%= link_to "Destroy", post_path(@post), data: {
+  turbo_method: :delete,
+  turbo_confirm: "Are you sure?"
+} %></button>
+
+<p> ******************************************************************************************************* </p>
+
+<h3>Comments:</h3>
+<ul>
+  <% @post.comments.each do |comment| %>
+    <p>
+      <strong>Comment:</strong>
+      <%= link_to comment.body, comment %>
+    </p>
+    <p>
+      <strong>By:</strong>
+      <%= link_to User.find(comment.user_id).name, user_path(User.find(comment.user_id)) %>
+    </p>
+    <p> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ </p>
+  <% end %>
+</ul>
+<p> ******************************************************************************************************* </p>
+
+<h3>Add a comment:</h3>
+<%= form_with model: [@post, @post.comments.build] do |form| %>
+  <p>
+    <%= form.label :User_Id %><br>
+    <%= form.text_field :user_id %>
+  </p>
+  <p>
+    <%= form.label :Comment %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<p> ******************************************************************************************************* </p>
+
+<button><%= link_to "All Posts", posts_path %></button>

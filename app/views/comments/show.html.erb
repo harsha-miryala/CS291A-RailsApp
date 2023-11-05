@@ -1,0 +1,20 @@
+<h2>
+  <strong>Comment:</strong>
+  <%= @comment.body %>
+</h2>
+
+<p>
+  <strong>By:</strong>
+  <%= link_to User.find(@comment.user_id).name, user_path(User.find(@comment.user_id)) %>
+</p>
+
+
+<button><%= link_to "Edit", edit_comment_path(@comment) %></button>
+<button><%= link_to "Destroy", comment_path(@comment), data: {
+  turbo_method: :delete,
+  turbo_confirm: "Are you sure?"
+} %></button>
+<br><br>
+<button>
+  <%= link_to "Post", post_path(Post.find(@comment.post_id)) %>
+</button>
