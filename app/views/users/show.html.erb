@@ -1,50 +1,29 @@
-<h1> User Profile </h1>
-<h2><%= @user.name %></h2>
-
-
-<button><%= link_to "Edit User", edit_user_path(@user) %></button>
-<button><%= link_to "Destroy User", user_path(@user), data: {
-  turbo_method: :delete,
-  turbo_confirm: "Are you sure?"
-} %></button>
-
-<p> ******************************************************************************************************* </p>
-
-<div>
-  <h3>Posts:</h3>
-  <ul>
-    <% @user.posts.each do |post| %>
-        <p>
-          <strong>Title:</strong>
-          <%= post.title %>
-        </p>
-        <p>
-          <strong>Body:</strong>
-          <%= post.body %>
-        </p>
-        <button type="button"> <%= link_to "Go to post", post %></button>
-        <p> ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ </p>
-    <% end %>
-  </ul>
+<div class="d-flex justify-content-center my-4">
+  <%= link_to 'Home', root_path, class: 'btn btn-primary' %>
 </div>
 
-<p> ******************************************************************************************************* </p>
-<h3>Add a post:</h3>
-<%= form_with model: [@user, @user.posts.build] do |form| %>
-  <p>
-    <%= form.label :title %><br>
-    <%= form.text_field :title %>
-  </p>
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
+<div class="container mt-4">
+  <h1>User Details</h1>
 
-<p> ******************************************************************************************************* </p>
-<button><%= link_to "All Users", users_path %></button>
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2><%= @user.name %></h2>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Email: <%= @user.email %></h5>
+    </div>
+  </div>
 
+  <h2>Posts</h2>
+  <% @user.posts.each do |post| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h3 class="card-title"><%= post.title %></h3>
+        <p class="card-text"><%= post.content %></p>
+        <%= link_to 'Show Post', post_path(post), class: 'btn btn-secondary' %>
+      </div>
+    </div>
+  <% end %>
 
+  <%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+</div>
